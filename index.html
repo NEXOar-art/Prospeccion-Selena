@@ -52,6 +52,7 @@
   .kpi-card.orange { border-color: #FF9F1C; }
   .kpi-card.pink { border-color: #EF476F; }
   .kpi-card.purple { border-color: #9D4EDD; }
+  .kpi-card.red { border-color: #E63946; }
   .kpi-label { font-size: 12px; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
   .kpi-value { font-size: 26px; font-weight: 700; margin-top: 6px; color: #2c3e50; }
   .kpi-sub { font-size: 12px; color: #95a5a6; margin-top: 4px; }
@@ -262,6 +263,26 @@
     border-color: #9D4EDD;
   }
 
+  /* Skill Button */
+  .skill-btn {
+    background: white;
+    border: 2px solid #9D4EDD;
+    color: #9D4EDD;
+    padding: 5px 12px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .skill-btn:hover { transform: scale(1.05); }
+  .skill-btn.active {
+    background: linear-gradient(135deg, #9D4EDD 0%, #E63946 100%);
+    color: white;
+    border-color: #9D4EDD;
+  }
+
   .price-display {
     display: inline-block;
     padding: 5px 12px;
@@ -270,11 +291,12 @@
     font-size: 12px;
     background: #f0f4f8;
     color: #7f8c8d;
-    min-width: 90px;
+    min-width: 100px;
   }
   .price-display.basic { background: #e0f4ff; color: #0077B6; }
   .price-display.advanced { background: #fff4d6; color: #d48806; }
   .price-display.premium { background: #f0e6ff; color: #9D4EDD; }
+  .price-display.has-skill { box-shadow: 0 0 0 2px #E63946; }
 
   .potential-btn {
     background: transparent;
@@ -339,6 +361,11 @@
     <div class="kpi-value" id="kpiMantenimiento">$0</div>
     <div class="kpi-sub">USD recurrente</div>
   </div>
+  <div class="kpi-card red">
+    <div class="kpi-label">Skills Activados</div>
+    <div class="kpi-value" id="kpiSkills">$0</div>
+    <div class="kpi-sub">USD por dashboards</div>
+  </div>
 </div>
 
 <!-- Info Card with Benefits & Pricing -->
@@ -368,7 +395,7 @@
     <div class="plan-card">
       <div class="plan-name">🥉 Básico</div>
       <div class="plan-price">$98.000 ARS</div>
-      <div class="plan-maintenance">Sin mantenimiento</div>
+      <div class="plan-maintenance">+ $0/mes mantenimiento</div>
       <div class="plan-desc">Landing page estática, diseño premium responsive, formulario de captura de leads.</div>
     </div>
     <div class="plan-card popular">
@@ -385,7 +412,7 @@
     </div>
   </div>
   <div class="addon">
-    📊 <strong>Dashboard específico para restaurantes:</strong> 40 USD por única vez (Opcional)
+    📊 <strong>Skill Dashboard específico para restaurantes:</strong> + 40 USD por única vez (Opcional) — Se suma al plan elegido.
   </div>
   <div class="payment-methods">
     <div>💳 <strong>Métodos de Pago:</strong></div>
@@ -410,7 +437,8 @@
           <th>🥉 Básico</th>
           <th>⭐ Avanzado</th>
           <th>🥇 Premium</th>
-          <th>💰 Precio Plan</th>
+          <th>📊 Skill</th>
+          <th>💰 Precio Total</th>
           <th>🎯 Potencial</th>
         </tr>
       </thead>
@@ -423,27 +451,27 @@
 // ==================== DATOS DE LEADS ====================
 const leads = [
   // CIUDAD DE CARDALES (7 leads)
-  {ciudad:"Cardales", telefono:"+5492304478372", planSeleccionado:null, potential:false},
-  {ciudad:"Cardales", telefono:"+5492304525016", planSeleccionado:null, potential:false},
-  {ciudad:"Cardales", telefono:"+5491157729482", planSeleccionado:null, potential:false},
-  {ciudad:"Cardales", telefono:"+5491171213507", planSeleccionado:null, potential:false},
-  {ciudad:"Cardales", telefono:"+5491140919221", planSeleccionado:null, potential:false},
-  {ciudad:"Cardales", telefono:"+5491150620295", planSeleccionado:null, potential:false},
-  {ciudad:"Cardales", telefono:"+5491122490816", planSeleccionado:null, potential:false},
+  {ciudad:"Cardales", telefono:"+5492304478372", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Cardales", telefono:"+5492304525016", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Cardales", telefono:"+5491157729482", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Cardales", telefono:"+5491171213507", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Cardales", telefono:"+5491140919221", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Cardales", telefono:"+5491150620295", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Cardales", telefono:"+5491122490816", planSeleccionado:null, skill:false, potential:false},
 
   // CAPILLA DEL SEÑOR (12 leads)
-  {ciudad:"Capilla del Señor", telefono:"+5492323328837", planSeleccionado:null, potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491140754477", planSeleccionado:null, potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5492323215891", planSeleccionado:null, potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491155042246", planSeleccionado:null, potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491154667283", planSeleccionado:null, potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491136395323", planSeleccionado:null, potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5492323491672", planSeleccionado:null, potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491122880503", planSeleccionado:null, potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491144086195", planSeleccionado:null, potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491123936485", planSeleccionado:null, potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491134249949", planSeleccionado:null, potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5492323581088", planSeleccionado:null, potential:false}
+  {ciudad:"Capilla del Señor", telefono:"+5492323328837", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491140754477", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5492323215891", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491155042246", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491154667283", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491136395323", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5492323491672", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491122880503", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491144086195", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491123936485", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491134249949", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5492323581088", planSeleccionado:null, skill:false, potential:false}
 ];
 
 // ==================== PRECIOS PLANES ACTUALIZADOS ====================
@@ -452,6 +480,7 @@ const PLANES = {
   avanzado: { nombre: "⭐ Avanzado", precio: 160000, mantenimiento: 30 },
   premium:  { nombre: "🥇 Premium",  precio: 430000, mantenimiento: 60 }
 };
+const PRECIO_SKILL = 40; // USD
 
 // ==================== MENSAJE DE WHATSAPP ====================
 const msgRestaurantes = encodeURIComponent(`Hola buenas noches!! Somos NEXO-ART y ayudamos a negocios gastronómicos a digitalizar el servicio y atencion, creamos páginas web app para rotiserías, pizzerías y restaurantes, totalmente resposivas para que se vean en cualquier dispositivo.
@@ -485,10 +514,14 @@ function updateKPIs() {
   // Calcular ingresos según plan seleccionado de los potenciales
   let ingresos = 0;
   let mantenimiento = 0;
+  let ingresosSkills = 0;
   leads.forEach(l => {
     if (l.potential && l.planSeleccionado) {
       ingresos += PLANES[l.planSeleccionado].precio;
       mantenimiento += PLANES[l.planSeleccionado].mantenimiento;
+    }
+    if (l.potential && l.skill) {
+      ingresosSkills += PRECIO_SKILL;
     }
   });
   
@@ -499,6 +532,7 @@ function updateKPIs() {
   document.getElementById('kpiIngresos').textContent = '$' + ingresos.toLocaleString('es-AR');
   document.getElementById('kpiConversion').textContent = conversion + '%';
   document.getElementById('kpiMantenimiento').textContent = '$' + mantenimiento + ' USD';
+  document.getElementById('kpiSkills').textContent = '$' + ingresosSkills + ' USD';
   document.getElementById('countLeads').textContent = totalLeads + ' negocios';
 }
 
@@ -518,12 +552,17 @@ function renderTable() {
       Enviar
     </a>`;
     
-    // Precio display según plan seleccionado
+    // Precio display según plan seleccionado + skill
     let priceDisplay = '<span class="price-display">Sin plan</span>';
     if (item.planSeleccionado) {
       const plan = PLANES[item.planSeleccionado];
-      const mantText = plan.mantenimiento > 0 ? ` + $${plan.mantenimiento}/mes` : '';
-      priceDisplay = `<span class="price-display ${item.planSeleccionado}">$${plan.precio.toLocaleString('es-AR')}${mantText}</span>`;
+      const mantText = plan.mantenimiento > 0 ? ` + $${plan.mantenimiento}/mes` : ' + $0/mes';
+      const skillText = item.skill ? ` + Skill $${PRECIO_SKILL}` : '';
+      const hasSkillClass = item.skill ? ' has-skill' : '';
+      priceDisplay = `<span class="price-display ${item.planSeleccionado}${hasSkillClass}">$${plan.precio.toLocaleString('es-AR')}${mantText}${skillText}</span>`;
+    } else if (item.skill) {
+      // Si solo tiene skill sin plan
+      priceDisplay = `<span class="price-display has-skill" style="background:#f0e6ff;color:#9D4EDD;">Solo Skill $${PRECIO_SKILL}</span>`;
     }
     
     tr.innerHTML = `
@@ -533,6 +572,7 @@ function renderTable() {
       <td><button class="plan-btn basic ${item.planSeleccionado==='basico'?'active':''}" onclick="selectPlan(${idx},'basico')">🥉 $98k</button></td>
       <td><button class="plan-btn advanced ${item.planSeleccionado==='avanzado'?'active':''}" onclick="selectPlan(${idx},'avanzado')">⭐ $160k</button></td>
       <td><button class="plan-btn premium ${item.planSeleccionado==='premium'?'active':''}" onclick="selectPlan(${idx},'premium')">🥇 $430k</button></td>
+      <td><button class="skill-btn ${item.skill?'active':''}" onclick="toggleSkill(${idx})">📊 ${item.skill?'✓ +$40':'Agregar'}</button></td>
       <td>${priceDisplay}</td>
       <td><button class="potential-btn ${item.potential?'active':''}" onclick="togglePotential(${idx})">${item.potential?'✓ Potencial':'Marcar'}</button></td>
     `;
@@ -547,6 +587,11 @@ function selectPlan(idx, plan) {
   } else {
     leads[idx].planSeleccionado = plan;
   }
+  renderAll();
+}
+
+function toggleSkill(idx) {
+  leads[idx].skill = !leads[idx].skill;
   renderAll();
 }
 
