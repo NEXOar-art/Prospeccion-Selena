@@ -31,6 +31,63 @@
     backdrop-filter: blur(10px);
   }
 
+  /* Exchange Rate Input */
+  .exchange-rate-container {
+    background: linear-gradient(135deg, #FFD93D 0%, #FF9F1C 100%);
+    padding: 18px 22px;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(255,159,28,0.3);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    color: #2c3e50;
+  }
+  .exchange-rate-container .label-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .exchange-rate-container .icon {
+    font-size: 28px;
+  }
+  .exchange-rate-container .title {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .exchange-rate-container .sub {
+    font-size: 12px;
+    opacity: 0.85;
+  }
+  .exchange-rate-container input {
+    width: 140px;
+    padding: 10px 14px;
+    border: 3px solid white;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 800;
+    text-align: center;
+    background: white;
+    color: #2c3e50;
+    outline: none;
+    transition: all 0.2s;
+  }
+  .exchange-rate-container input:focus {
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.5);
+    transform: scale(1.02);
+  }
+  .exchange-rate-container .currency-display {
+    background: rgba(255,255,255,0.3);
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 13px;
+    backdrop-filter: blur(10px);
+  }
+
   /* KPI Cards */
   .kpi-grid {
     display: grid;
@@ -56,6 +113,97 @@
   .kpi-label { font-size: 12px; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
   .kpi-value { font-size: 26px; font-weight: 700; margin-top: 6px; color: #2c3e50; }
   .kpi-sub { font-size: 12px; color: #95a5a6; margin-top: 4px; }
+
+  /* TOTAL CARD - Destacada */
+  .total-card {
+    background: linear-gradient(135deg, #E63946 0%, #9D4EDD 50%, #0077B6 100%);
+    color: white;
+    padding: 26px;
+    border-radius: 18px;
+    box-shadow: 0 10px 32px rgba(230,57,70,0.35);
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .total-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .total-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
+    z-index: 2;
+  }
+  .total-card-header h2 {
+    font-size: 22px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .total-card-header .badge {
+    background: rgba(255,255,255,0.25);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    backdrop-filter: blur(10px);
+  }
+  .total-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    position: relative;
+    z-index: 2;
+  }
+  .total-item {
+    background: rgba(255,255,255,0.15);
+    padding: 16px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .total-item .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.9;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .total-item .value {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+  .total-item .detail {
+    font-size: 11px;
+    opacity: 0.85;
+    margin-top: 4px;
+  }
+  .total-item.highlight {
+    background: rgba(255,255,255,0.95);
+    color: #2c3e50;
+    border: 2px solid #FFD93D;
+  }
+  .total-item.highlight .value {
+    color: #E63946;
+    font-size: 26px;
+  }
+  .total-item.highlight .label {
+    color: #7f8c8d;
+  }
 
   /* Info Card */
   .info-card {
@@ -229,12 +377,6 @@
   .city-capilla { background: #fff4d6; color: #FF9F1C; }
 
   /* Plan Selector Buttons */
-  .plan-btn-group {
-    display: flex;
-    gap: 4px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
   .plan-btn {
     background: white;
     border: 2px solid #e0e6ed;
@@ -321,6 +463,8 @@
     .header h1 { font-size: 20px; }
     .kpi-value { font-size: 22px; }
     th, td { padding: 8px 6px; font-size: 11px; }
+    .total-item .value { font-size: 20px; }
+    .total-item.highlight .value { font-size: 22px; }
   }
 </style>
 </head>
@@ -332,6 +476,22 @@
     <strong>NEXO‑ART</strong> es una agencia digital especializada en crear páginas web y soluciones de e‑commerce diseñadas para aumentar ventas y optimizar la atención al cliente. Transformamos la presencia online de negocios gastronómicos, comercios y empresas industriales, convirtiendo visitantes en clientes reales.
   </div>
   <div class="date">📅 Sábado, 05 Septiembre 2026</div>
+</div>
+
+<!-- Exchange Rate Input -->
+<div class="exchange-rate-container">
+  <div class="label-group">
+    <div class="icon">💱</div>
+    <div>
+      <div class="title">Tipo de Cambio Dólar/Peso del Día</div>
+      <div class="sub">Actualizá el valor para calcular totales en ARS</div>
+    </div>
+  </div>
+  <div class="label-group">
+    <div class="currency-display">1 USD =</div>
+    <input type="number" id="exchangeRate" value="1500" min="1" step="0.01" oninput="updateKPIs()">
+    <div class="currency-display">ARS</div>
+  </div>
 </div>
 
 <!-- KPI Cards -->
@@ -365,6 +525,36 @@
     <div class="kpi-label">Skills Activados</div>
     <div class="kpi-value" id="kpiSkills">$0</div>
     <div class="kpi-sub">USD por dashboards</div>
+  </div>
+</div>
+
+<!-- TOTAL CARD - Destacada -->
+<div class="total-card">
+  <div class="total-card-header">
+    <h2>💎 TOTAL GENERAL (Plan + Skill + Mantenimiento)</h2>
+    <div class="badge">📊 Cálculo en tiempo real</div>
+  </div>
+  <div class="total-grid">
+    <div class="total-item">
+      <div class="label">💵 Total en USD</div>
+      <div class="value" id="totalUSD">$0</div>
+      <div class="detail">Skill + Mantenimiento</div>
+    </div>
+    <div class="total-item">
+      <div class="label">💰 Total Único (ARS)</div>
+      <div class="value" id="totalUnicoARS">$0</div>
+      <div class="detail">Planes + Skills convertidos</div>
+    </div>
+    <div class="total-item">
+      <div class="label">🔄 Total Mensual (ARS)</div>
+      <div class="value" id="totalMensualARS">$0</div>
+      <div class="detail">Mantenimiento recurrente</div>
+    </div>
+    <div class="total-item highlight">
+      <div class="label">🏆 TOTAL 1er MES (ARS)</div>
+      <div class="value" id="totalPrimerMesARS">$0</div>
+      <div class="detail">Único + Mensual del primer mes</div>
+    </div>
   </div>
 </div>
 
@@ -510,6 +700,7 @@ function renderAll() {
 function updateKPIs() {
   const totalLeads = leads.length;
   const potenciales = leads.filter(l => l.potential).length;
+  const tc = parseFloat(document.getElementById('exchangeRate').value) || 0;
   
   // Calcular ingresos según plan seleccionado de los potenciales
   let ingresos = 0;
@@ -534,6 +725,24 @@ function updateKPIs() {
   document.getElementById('kpiMantenimiento').textContent = '$' + mantenimiento + ' USD';
   document.getElementById('kpiSkills').textContent = '$' + ingresosSkills + ' USD';
   document.getElementById('countLeads').textContent = totalLeads + ' negocios';
+  
+  // ==================== CÁLCULO DEL TOTAL GENERAL ====================
+  // Total en USD: skills + mantenimiento
+  const totalUSD = ingresosSkills + mantenimiento;
+  
+  // Total único ARS: precio de planes (ya en ARS) + skills convertidos a ARS
+  const totalUnicoARS = ingresos + (ingresosSkills * tc);
+  
+  // Total mensual ARS: mantenimiento convertido a ARS
+  const totalMensualARS = mantenimiento * tc;
+  
+  // Total primer mes ARS: único + mensual
+  const totalPrimerMesARS = totalUnicoARS + totalMensualARS;
+  
+  document.getElementById('totalUSD').textContent = '$' + totalUSD.toLocaleString('en-US') + ' USD';
+  document.getElementById('totalUnicoARS').textContent = '$' + Math.round(totalUnicoARS).toLocaleString('es-AR');
+  document.getElementById('totalMensualARS').textContent = '$' + Math.round(totalMensualARS).toLocaleString('es-AR');
+  document.getElementById('totalPrimerMesARS').textContent = '$' + Math.round(totalPrimerMesARS).toLocaleString('es-AR');
 }
 
 function renderTable() {
