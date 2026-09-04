@@ -51,6 +51,7 @@
   .kpi-card.green { border-color: #06D6A0; }
   .kpi-card.orange { border-color: #FF9F1C; }
   .kpi-card.pink { border-color: #EF476F; }
+  .kpi-card.purple { border-color: #9D4EDD; }
   .kpi-label { font-size: 12px; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
   .kpi-value { font-size: 26px; font-weight: 700; margin-top: 6px; color: #2c3e50; }
   .kpi-sub { font-size: 12px; color: #95a5a6; margin-top: 4px; }
@@ -112,7 +113,16 @@
     font-weight: 700;
   }
   .plan-name { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-  .plan-price { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+  .plan-price { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+  .plan-maintenance {
+    display: inline-block;
+    background: rgba(255,255,255,0.3);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
   .plan-desc { font-size: 12px; opacity: 0.95; line-height: 1.5; }
   .addon {
     margin-top: 12px;
@@ -129,31 +139,6 @@
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-  }
-
-  /* Tabs */
-  .tabs {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-  }
-  .tab {
-    background: white;
-    border: 2px solid #e0e6ed;
-    padding: 10px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 13px;
-    transition: all 0.2s;
-    color: #7f8c8d;
-  }
-  .tab:hover { border-color: #00B4D8; color: #00B4D8; }
-  .tab.active {
-    background: linear-gradient(135deg, #00B4D8 0%, #0077B6 100%);
-    color: white;
-    border-color: transparent;
   }
 
   /* Tables */
@@ -182,30 +167,33 @@
     font-weight: 600;
   }
   .table-wrapper { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
   thead {
     background: linear-gradient(135deg, #0077B6 0%, #00B4D8 100%);
     color: white;
   }
   th {
-    padding: 14px 12px;
-    text-align: left;
+    padding: 12px 10px;
+    text-align: center;
     font-weight: 600;
-    font-size: 13px;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.3px;
   }
+  th:nth-child(2) { text-align: left; }
   td {
-    padding: 14px 12px;
+    padding: 12px 10px;
     border-bottom: 1px solid #f0f4f8;
     vertical-align: middle;
+    text-align: center;
   }
+  td:nth-child(2) { text-align: left; }
   tbody tr { transition: background 0.15s; }
   tbody tr:hover { background: #f8fafc; }
   tbody tr.potential { background: linear-gradient(90deg, rgba(6,214,160,0.12) 0%, rgba(6,214,160,0.02) 100%); }
   tbody tr.potential td:first-child { border-left: 4px solid #06D6A0; }
 
-  .checkbox-cell { width: 40px; text-align: center; }
+  .checkbox-cell { width: 40px; }
   .checkbox-cell input[type="checkbox"] {
     width: 18px; height: 18px;
     cursor: pointer;
@@ -215,19 +203,19 @@
   .wa-link {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     background: #25D366;
     color: white;
-    padding: 8px 16px;
+    padding: 6px 12px;
     border-radius: 20px;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     transition: all 0.2s;
     white-space: nowrap;
   }
   .wa-link:hover { background: #128C7E; transform: scale(1.05); }
-  .wa-icon { width: 16px; height: 16px; }
+  .wa-icon { width: 14px; height: 14px; }
 
   .city-badge {
     display: inline-block;
@@ -239,14 +227,63 @@
   .city-cardales { background: #e0f4ff; color: #0077B6; }
   .city-capilla { background: #fff4d6; color: #FF9F1C; }
 
+  /* Plan Selector Buttons */
+  .plan-btn-group {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .plan-btn {
+    background: white;
+    border: 2px solid #e0e6ed;
+    padding: 5px 10px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    transition: all 0.2s;
+    color: #7f8c8d;
+  }
+  .plan-btn:hover { transform: scale(1.05); }
+  .plan-btn.basic.active {
+    background: #00B4D8;
+    color: white;
+    border-color: #00B4D8;
+  }
+  .plan-btn.advanced.active {
+    background: #FFD93D;
+    color: #2c3e50;
+    border-color: #FFD93D;
+  }
+  .plan-btn.premium.active {
+    background: linear-gradient(135deg, #9D4EDD 0%, #EF476F 100%);
+    color: white;
+    border-color: #9D4EDD;
+  }
+
+  .price-display {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 12px;
+    background: #f0f4f8;
+    color: #7f8c8d;
+    min-width: 90px;
+  }
+  .price-display.basic { background: #e0f4ff; color: #0077B6; }
+  .price-display.advanced { background: #fff4d6; color: #d48806; }
+  .price-display.premium { background: #f0e6ff; color: #9D4EDD; }
+
   .potential-btn {
     background: transparent;
     border: 2px solid #06D6A0;
     color: #06D6A0;
-    padding: 6px 14px;
+    padding: 5px 12px;
     border-radius: 15px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     transition: all 0.2s;
   }
@@ -256,65 +293,12 @@
   }
   .potential-btn:hover { transform: scale(1.05); }
 
-  /* Matrix */
-  .matrix-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-  .matrix-card {
-    background: white;
-    border-radius: 14px;
-    padding: 20px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-  }
-  .matrix-card h4 {
-    font-size: 14px;
-    color: #0077B6;
-    margin-bottom: 14px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #f0f4f8;
-  }
-  .matrix-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .matrix-table th {
-    background: #f0f4f8;
-    color: #0077B6;
-    padding: 10px;
-    text-align: center;
-    font-size: 12px;
-  }
-  .matrix-table td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #f0f4f8;
-  }
-  .matrix-table td:first-child { text-align: left; font-weight: 600; background: #f8fafc; }
-  .cell-hot { background: #06D6A0; color: white; font-weight: 700; }
-  .cell-warm { background: #FFD93D; color: #2c3e50; font-weight: 600; }
-
-  .bar-chart { display: flex; flex-direction: column; gap: 10px; }
-  .bar-row { display: flex; align-items: center; gap: 10px; font-size: 13px; }
-  .bar-label { width: 140px; font-weight: 600; color: #2c3e50; }
-  .bar-track { flex: 1; height: 28px; background: #f0f4f8; border-radius: 14px; overflow: hidden; position: relative; }
-  .bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #00B4D8 0%, #06D6A0 100%);
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    padding-left: 12px;
-    color: white;
-    font-weight: 700;
-    font-size: 12px;
-    transition: width 0.5s ease;
-  }
-
   .hidden { display: none; }
 
   @media (max-width: 768px) {
     .header h1 { font-size: 20px; }
     .kpi-value { font-size: 22px; }
+    th, td { padding: 8px 6px; font-size: 11px; }
   }
 </style>
 </head>
@@ -350,6 +334,11 @@
     <div class="kpi-value" id="kpiConversion">0%</div>
     <div class="kpi-sub">Potenciales / Total</div>
   </div>
+  <div class="kpi-card purple">
+    <div class="kpi-label">Mantenimiento Mensual</div>
+    <div class="kpi-value" id="kpiMantenimiento">$0</div>
+    <div class="kpi-sub">USD recurrente</div>
+  </div>
 </div>
 
 <!-- Info Card with Benefits & Pricing -->
@@ -374,22 +363,25 @@
     </div>
   </div>
 
-  <h3 style="margin-top: 18px;">💰 Planes en Argentina</h3>
+  <h3 style="margin-top: 18px;">💰 Planes en Argentina (Precios Actualizados)</h3>
   <div class="pricing-grid">
     <div class="plan-card">
       <div class="plan-name">🥉 Básico</div>
       <div class="plan-price">$98.000 ARS</div>
+      <div class="plan-maintenance">Sin mantenimiento</div>
       <div class="plan-desc">Landing page estática, diseño premium responsive, formulario de captura de leads.</div>
     </div>
     <div class="plan-card popular">
       <div class="plan-name">🥈 Avanzado</div>
       <div class="plan-price">$160.000 ARS</div>
+      <div class="plan-maintenance">+ $30 USD/mes mantenimiento</div>
       <div class="plan-desc">Incluye todo lo del Básico + animaciones premium, CRM automático, mantenimiento mensual.</div>
     </div>
     <div class="plan-card">
       <div class="plan-name">🥇 Premium</div>
       <div class="plan-price">$430.000 ARS</div>
-      <div class="plan-desc">Web completa full custom, e‑commerce integrado, SEO técnico avanzado, mantenimiento mensual (60 USD).</div>
+      <div class="plan-maintenance">+ $60 USD/mes mantenimiento</div>
+      <div class="plan-desc">Web completa full custom, e‑commerce integrado, SEO técnico avanzado, mantenimiento mensual.</div>
     </div>
   </div>
   <div class="addon">
@@ -402,93 +394,66 @@
   </div>
 </div>
 
-<!-- Tabs -->
-<div class="tabs">
-  <div class="tab active" onclick="switchTab('restaurantes', this)">🍽️ Restaurantes</div>
-  <div class="tab" onclick="switchTab('matriz', this)">📊 Análisis por Ciudad</div>
-</div>
-
-<!-- Tab Restaurantes -->
-<div id="tab-restaurantes" class="tab-content">
-  <div class="table-container">
-    <div class="table-header">
-      <h3>🍽️ Leads de Restaurantes - Cardales & Capilla del Señor</h3>
-      <span class="table-count" id="countLeads">0 negocios</span>
-    </div>
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th class="checkbox-cell">✓</th>
-            <th>Ciudad</th>
-            <th>📞 WhatsApp</th>
-            <th>🎯 Potencial</th>
-          </tr>
-        </thead>
-        <tbody id="tbodyLeads"></tbody>
-      </table>
-    </div>
+<!-- Table of Leads -->
+<div class="table-container">
+  <div class="table-header">
+    <h3>🍽️ Leads de Restaurantes - Cardales & Capilla del Señor</h3>
+    <span class="table-count" id="countLeads">0 negocios</span>
   </div>
-</div>
-
-<!-- Tab Matriz -->
-<div id="tab-matriz" class="tab-content hidden">
-  <div class="matrix-grid">
-    <div class="matrix-card">
-      <h4>📊 Distribución de Leads por Ciudad</h4>
-      <table class="matrix-table" id="matrixCiudad"></table>
-    </div>
-    <div class="matrix-card">
-      <h4>💰 Ingresos Potenciales por Ciudad</h4>
-      <div class="bar-chart" id="ingresosCiudad"></div>
-    </div>
-    <div class="matrix-card">
-      <h4>🎯 Potenciales vs No Potenciales por Ciudad</h4>
-      <table class="matrix-table" id="matrixPotencial"></table>
-    </div>
-    <div class="matrix-card">
-      <h4>📈 % de Conversión por Ciudad</h4>
-      <div class="bar-chart" id="conversionCiudad"></div>
-    </div>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th class="checkbox-cell">✓</th>
+          <th style="text-align:left">Ciudad</th>
+          <th>📞 WhatsApp</th>
+          <th>🥉 Básico</th>
+          <th>⭐ Avanzado</th>
+          <th>🥇 Premium</th>
+          <th>💰 Precio Plan</th>
+          <th>🎯 Potencial</th>
+        </tr>
+      </thead>
+      <tbody id="tbodyLeads"></tbody>
+    </table>
   </div>
 </div>
 
 <script>
 // ==================== DATOS DE LEADS ====================
-// Formato WhatsApp Argentina: +54 9 + código área + número
 const leads = [
   // CIUDAD DE CARDALES (7 leads)
-  {ciudad:"Cardales", telefono:"+5492304478372", potential:false},
-  {ciudad:"Cardales", telefono:"+5492304525016", potential:false},
-  {ciudad:"Cardales", telefono:"+5491157729482", potential:false},
-  {ciudad:"Cardales", telefono:"+5491171213507", potential:false},
-  {ciudad:"Cardales", telefono:"+5491140919221", potential:false},
-  {ciudad:"Cardales", telefono:"+5491150620295", potential:false},
-  {ciudad:"Cardales", telefono:"+5491122490816", potential:false},
+  {ciudad:"Cardales", telefono:"+5492304478372", planSeleccionado:null, potential:false},
+  {ciudad:"Cardales", telefono:"+5492304525016", planSeleccionado:null, potential:false},
+  {ciudad:"Cardales", telefono:"+5491157729482", planSeleccionado:null, potential:false},
+  {ciudad:"Cardales", telefono:"+5491171213507", planSeleccionado:null, potential:false},
+  {ciudad:"Cardales", telefono:"+5491140919221", planSeleccionado:null, potential:false},
+  {ciudad:"Cardales", telefono:"+5491150620295", planSeleccionado:null, potential:false},
+  {ciudad:"Cardales", telefono:"+5491122490816", planSeleccionado:null, potential:false},
 
   // CAPILLA DEL SEÑOR (12 leads)
-  {ciudad:"Capilla del Señor", telefono:"+5492323328837", potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491140754477", potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5492323215891", potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491155042246", potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491154667283", potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491136395323", potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5492323491672", potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491122880503", potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491144086195", potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491123936485", potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5491134249949", potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5492323581088", potential:false}
+  {ciudad:"Capilla del Señor", telefono:"+5492323328837", planSeleccionado:null, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491140754477", planSeleccionado:null, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5492323215891", planSeleccionado:null, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491155042246", planSeleccionado:null, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491154667283", planSeleccionado:null, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491136395323", planSeleccionado:null, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5492323491672", planSeleccionado:null, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491122880503", planSeleccionado:null, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491144086195", planSeleccionado:null, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491123936485", planSeleccionado:null, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5491134249949", planSeleccionado:null, potential:false},
+  {ciudad:"Capilla del Señor", telefono:"+5492323581088", planSeleccionado:null, potential:false}
 ];
 
-// ==================== PRECIOS PLANES ====================
-const PRECIO_BASICO = 98000;
-const PRECIO_AVANZADO = 160000;
-const PRECIO_PREMIUM = 430000;
-// Para el cálculo de ingresos potenciales usamos el plan más vendido (Avanzado)
-const PRECIO_PROMEDIO = PRECIO_AVANZADO;
+// ==================== PRECIOS PLANES ACTUALIZADOS ====================
+const PLANES = {
+  basico:   { nombre: "🥉 Básico",   precio: 98000,  mantenimiento: 0  },
+  avanzado: { nombre: "⭐ Avanzado", precio: 160000, mantenimiento: 30 },
+  premium:  { nombre: "🥇 Premium",  precio: 430000, mantenimiento: 60 }
+};
 
-// ==================== MENSAJE DE WHATSAPP (Restaurantes) ====================
+// ==================== MENSAJE DE WHATSAPP ====================
 const msgRestaurantes = encodeURIComponent(`Hola buenas noches!! Somos NEXO-ART y ayudamos a negocios gastronómicos a digitalizar el servicio y atencion, creamos páginas web app para rotiserías, pizzerías y restaurantes, totalmente resposivas para que se vean en cualquier dispositivo.
 
 🍕 ¿Qué logramos con tu web?
@@ -510,20 +475,31 @@ function init() {
 // ==================== RENDER ====================
 function renderAll() {
   renderTable();
-  
-  // KPIs
+  updateKPIs();
+}
+
+function updateKPIs() {
   const totalLeads = leads.length;
   const potenciales = leads.filter(l => l.potential).length;
-  const ingresos = potenciales * PRECIO_PROMEDIO;
+  
+  // Calcular ingresos según plan seleccionado de los potenciales
+  let ingresos = 0;
+  let mantenimiento = 0;
+  leads.forEach(l => {
+    if (l.potential && l.planSeleccionado) {
+      ingresos += PLANES[l.planSeleccionado].precio;
+      mantenimiento += PLANES[l.planSeleccionado].mantenimiento;
+    }
+  });
+  
   const conversion = totalLeads > 0 ? ((potenciales/totalLeads)*100).toFixed(1) : 0;
   
   document.getElementById('kpiTotalLeads').textContent = totalLeads;
   document.getElementById('kpiPotenciales').textContent = potenciales;
   document.getElementById('kpiIngresos').textContent = '$' + ingresos.toLocaleString('es-AR');
   document.getElementById('kpiConversion').textContent = conversion + '%';
+  document.getElementById('kpiMantenimiento').textContent = '$' + mantenimiento + ' USD';
   document.getElementById('countLeads').textContent = totalLeads + ' negocios';
-  
-  renderMatrix();
 }
 
 function renderTable() {
@@ -539,113 +515,44 @@ function renderTable() {
     
     const waLink = `<a href="https://wa.me/${item.telefono}?text=${msgRestaurantes}" target="_blank" class="wa-link">
       <svg class="wa-icon" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Enviar WhatsApp
+      Enviar
     </a>`;
+    
+    // Precio display según plan seleccionado
+    let priceDisplay = '<span class="price-display">Sin plan</span>';
+    if (item.planSeleccionado) {
+      const plan = PLANES[item.planSeleccionado];
+      const mantText = plan.mantenimiento > 0 ? ` + $${plan.mantenimiento}/mes` : '';
+      priceDisplay = `<span class="price-display ${item.planSeleccionado}">$${plan.precio.toLocaleString('es-AR')}${mantText}</span>`;
+    }
     
     tr.innerHTML = `
       <td class="checkbox-cell"><input type="checkbox" ${item.potential?'checked':''} onchange="togglePotential(${idx})"></td>
       <td><span class="city-badge ${cityClass}">${cityIcon} ${item.ciudad}</span></td>
       <td>${waLink}</td>
+      <td><button class="plan-btn basic ${item.planSeleccionado==='basico'?'active':''}" onclick="selectPlan(${idx},'basico')">🥉 $98k</button></td>
+      <td><button class="plan-btn advanced ${item.planSeleccionado==='avanzado'?'active':''}" onclick="selectPlan(${idx},'avanzado')">⭐ $160k</button></td>
+      <td><button class="plan-btn premium ${item.planSeleccionado==='premium'?'active':''}" onclick="selectPlan(${idx},'premium')">🥇 $430k</button></td>
+      <td>${priceDisplay}</td>
       <td><button class="potential-btn ${item.potential?'active':''}" onclick="togglePotential(${idx})">${item.potential?'✓ Potencial':'Marcar'}</button></td>
     `;
     tbody.appendChild(tr);
   });
 }
 
-function togglePotential(idx) {
-  leads[idx].potential = !leads[idx].potential;
+function selectPlan(idx, plan) {
+  // Toggle: si ya está seleccionado el mismo plan, lo deselecciona
+  if (leads[idx].planSeleccionado === plan) {
+    leads[idx].planSeleccionado = null;
+  } else {
+    leads[idx].planSeleccionado = plan;
+  }
   renderAll();
 }
 
-// ==================== TABS ====================
-function switchTab(tabName, el) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
-  document.getElementById('tab-' + tabName).classList.remove('hidden');
-}
-
-// ==================== MATRIX ANALYSIS ====================
-function renderMatrix() {
-  const ciudades = ['Cardales', 'Capilla del Señor'];
-  
-  // Matriz Ciudad
-  let html = '<thead><tr><th>Ciudad</th><th>Total Leads</th><th>Potenciales</th><th>% Conversión</th></tr></thead><tbody>';
-  ciudades.forEach(c => {
-    const total = leads.filter(l => l.ciudad === c).length;
-    const pot = leads.filter(l => l.ciudad === c && l.potential).length;
-    const pct = total > 0 ? ((pot/total)*100).toFixed(1) : 0;
-    const cls = pot >= 5 ? 'cell-hot' : pot >= 2 ? 'cell-warm' : '';
-    html += `<tr>
-      <td>${c}</td>
-      <td class="${cls}">${total}</td>
-      <td class="${cls}">${pot}</td>
-      <td class="${cls}">${pct}%</td>
-    </tr>`;
-  });
-  const totalAll = leads.length;
-  const potAll = leads.filter(l => l.potential).length;
-  const pctAll = totalAll > 0 ? ((potAll/totalAll)*100).toFixed(1) : 0;
-  html += `<tr style="background:#e0f4ff;font-weight:700;">
-    <td>TOTAL</td>
-    <td>${totalAll}</td>
-    <td>${potAll}</td>
-    <td>${pctAll}%</td>
-  </tr>`;
-  html += '</tbody>';
-  document.getElementById('matrixCiudad').innerHTML = html;
-  
-  // Matriz Potencial
-  let html2 = '<thead><tr><th>Ciudad</th><th>✅ Potenciales</th><th>❌ No Potenciales</th></tr></thead><tbody>';
-  ciudades.forEach(c => {
-    const pot = leads.filter(l => l.ciudad === c && l.potential).length;
-    const noPot = leads.filter(l => l.ciudad === c && !l.potential).length;
-    html2 += `<tr>
-      <td>${c}</td>
-      <td class="cell-hot">${pot}</td>
-      <td>${noPot}</td>
-    </tr>`;
-  });
-  html2 += '</tbody>';
-  document.getElementById('matrixPotencial').innerHTML = html2;
-  
-  // Ingresos por Ciudad
-  const ingresosCiudad = {};
-  ciudades.forEach(c => {
-    const pot = leads.filter(l => l.ciudad === c && l.potential).length;
-    ingresosCiudad[c] = pot * PRECIO_PROMEDIO;
-  });
-  const maxIng = Math.max(...Object.values(ingresosCiudad), 1);
-  
-  let barHtml = '';
-  ciudades.forEach(c => {
-    const ing = ingresosCiudad[c];
-    const pct = (ing/maxIng)*100;
-    barHtml += `<div class="bar-row">
-      <div class="bar-label">${c}</div>
-      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:linear-gradient(90deg,#06D6A0,#FFD93D)">$${ing.toLocaleString('es-AR')}</div></div>
-    </div>`;
-  });
-  
-  if (potAll === 0) {
-    document.getElementById('ingresosCiudad').innerHTML = '<div style="text-align:center;color:#95a5a6;padding:20px;font-size:13px;">💡 Marca negocios como "Potencial" para ver ingresos por ciudad</div>';
-  } else {
-    document.getElementById('ingresosCiudad').innerHTML = barHtml;
-  }
-  
-  // Conversión por Ciudad
-  const maxConv = 100;
-  let convHtml = '';
-  ciudades.forEach(c => {
-    const total = leads.filter(l => l.ciudad === c).length;
-    const pot = leads.filter(l => l.ciudad === c && l.potential).length;
-    const pct = total > 0 ? (pot/total)*100 : 0;
-    convHtml += `<div class="bar-row">
-      <div class="bar-label">${c}</div>
-      <div class="bar-track"><div class="bar-fill" style="width:${pct}%">${pct.toFixed(1)}%</div></div>
-    </div>`;
-  });
-  document.getElementById('conversionCiudad').innerHTML = convHtml;
+function togglePotential(idx) {
+  leads[idx].potential = !leads[idx].potential;
+  renderAll();
 }
 
 init();
