@@ -639,8 +639,7 @@
     <div class="plan-card">
       <div class="plan-name">🥉 Básico</div>
       <div class="plan-price">$98.000 ARS</div>
-      <!-- Se eliminó la línea de mantenimiento para evitar confusión, ya que es pago único -->
-      <div class="plan-desc">Landing page estática, diseño premium responsive, formulario de captura de leads.</div>
+      <div class="plan-desc">Landing page estática, diseño premium responsive, formulario de captura de leads.<br><strong>💡 ¡Sin costos de mantenimiento mensual!</strong></div>
     </div>
     <div class="plan-card popular">
       <div class="plan-name">🥈 Avanzado</div>
@@ -756,7 +755,6 @@ function updateKPIs() {
   const potenciales = leads.filter(l => l.potential).length;
   const tc = parseFloat(document.getElementById('exchangeRate').value) || 0;
   
-  // Calcular ingresos según plan seleccionado de los potenciales
   let ingresos = 0;
   let mantenimiento = 0;
   let ingresosSkills = 0;
@@ -780,7 +778,6 @@ function updateKPIs() {
   document.getElementById('kpiSkills').textContent = '$' + ingresosSkills + ' USD';
   document.getElementById('countLeads').textContent = totalLeads + ' negocios';
   
-  // ==================== CÁLCULO DEL TOTAL GENERAL ====================
   const totalUSD = ingresosSkills + mantenimiento;
   const totalUnicoARS = ingresos + (ingresosSkills * tc);
   const totalMensualARS = mantenimiento * tc;
@@ -814,7 +811,7 @@ function renderTable() {
     
     let msgFinal = msgBase;
     if (intereses.length > 0) {
-      msgFinal += "\n\n📌 *Propuesta personalizada que preparamos para vos:*\n" + intereses.map(i => `✅ ${i}`).join("\n");
+      msgFinal += `\n\n📌 *Propuesta personalizada para tu local en ${item.ciudad}:*\n` + intereses.map(i => `✅ ${i}`).join("\n");
     }
     
     const waLink = `<a href="https://wa.me/${item.telefono}?text=${encodeURIComponent(msgFinal)}" target="_blank" class="wa-link">
@@ -822,15 +819,20 @@ function renderTable() {
       Enviar
     </a>`;
     
-    // Precio display según plan seleccionado + skill
+    // Precio display según plan seleccionado + skill (SIN mostrar mantenimiento 0)
     let priceDisplay = '<span class="price-display">Sin plan</span>';
     if (item.planSeleccionado) {
       const plan = PLANES[item.planSeleccionado];
-      // MODIFICADO: Si el mantenimiento es 0 (Plan Básico), no muestra texto de mantenimiento para evitar confusión
-      const mantText = plan.mantenimiento > 0 ? ` + $${plan.mantenimiento}/mes` : '';
-      const skillText = item.skill ? ` + Skill $${PRECIO_SKILL}` : '';
-      const hasSkillClass = item.skill ? ' has-skill' : '';
-      priceDisplay = `<span class="price-display ${item.planSeleccionado}${hasSkillClass}">$${plan.precio.toLocaleString('es-AR')}${mantText}${skillText}</span>`;
+      let mantText = plan.mantenimiento > 0 ? ` + $${plan.mantenimiento}/mes` : '';
+      let skillText = item.skill ? ` + Skill $${PRECIO_SKILL}` : '';
+      let hasSkillClass = item.skill ? ' has-skill' : '';
+      
+      let displayText = `$${plan.precio.toLocaleString('es-AR')}`;
+      if (mantText || skillText) {
+        displayText += `${mantText}${skillText}`;
+      }
+      
+      priceDisplay = `<span class="price-display ${item.planSeleccionado}${hasSkillClass}">${displayText}</span>`;
     } else if (item.skill) {
       priceDisplay = `<span class="price-display has-skill" style="background:#f0e6ff;color:#9D4EDD;">Solo Skill $${PRECIO_SKILL}</span>`;
     }
