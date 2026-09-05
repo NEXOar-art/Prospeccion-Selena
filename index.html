@@ -800,18 +800,42 @@ function renderTable() {
     const cityClass = item.ciudad === 'Cardales' ? 'city-cardales' : 'city-capilla';
     const cityIcon = item.ciudad === 'Cardales' ? '🏘️' : '🏡';
     
-    // ==================== MENSAJE DINÁMICO DE WHATSAPP ====================
+    // ==================== MENSAJE DINÁMICO DE WHATSAPP CON PRECIOS Y TOTAL ====================
     let intereses = [];
+    let totalARS = 0;
+    let totalUSD = 0;
+
     if (item.planSeleccionado) {
-      intereses.push(`Plan ${PLANES[item.planSeleccionado].nombre}`);
+      const plan = PLANES[item.planSeleccionado];
+      totalARS += plan.precio;
+      totalUSD += plan.mantenimiento;
+      
+      let precioStr = `$${plan.precio.toLocaleString('es-AR')} ARS`;
+      if (plan.mantenimiento > 0) {
+        precioStr += ` + $${plan.mantenimiento} USD/mes`;
+      }
+      intereses.push(`${plan.nombre}: ${precioStr}`);
     }
+    
     if (item.skill) {
-      intereses.push("Skill Tablero de Control (opcional)");
+      totalUSD += PRECIO_SKILL;
+      intereses.push(`Skill Tablero de Control (opcional): $${PRECIO_SKILL} USD`);
     }
     
     let msgFinal = msgBase;
     if (intereses.length > 0) {
-      msgFinal += `\n\n📌 *Propuesta personalizada para tu local en ${item.ciudad}:*\n` + intereses.map(i => `✅ ${i}`).join("\n");
+      let totalStr = "";
+      if (totalARS > 0 && totalUSD > 0) {
+        totalStr = `$${totalARS.toLocaleString('es-AR')} ARS + $${totalUSD} USD`;
+      } else if (totalARS > 0) {
+        totalStr = `$${totalARS.toLocaleString('es-AR')} ARS`;
+      } else if (totalUSD > 0) {
+        totalStr = `$${totalUSD} USD`;
+      }
+      
+      msgFinal += `\n\n📌 *Propuesta personalizada para tu local en ${item.ciudad}:*\n` + 
+                  intereses.map(i => `✅ ${i}`).join("\n") + 
+                  `\n\n💰 *Total Inversión:* ${totalStr}`;
     }
     
     const waLink = `<a href="https://wa.me/${item.telefono}?text=${encodeURIComponent(msgFinal)}" target="_blank" class="wa-link">
