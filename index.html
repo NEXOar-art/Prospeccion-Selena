@@ -793,6 +793,9 @@ function renderTable() {
   const tbody = document.getElementById('tbodyLeads');
   tbody.innerHTML = '';
   
+  // Obtenemos el tipo de cambio actual para el cálculo del mensaje
+  const tc = parseFloat(document.getElementById('exchangeRate').value) || 1500;
+  
   leads.forEach((item, idx) => {
     const tr = document.createElement('tr');
     if (item.potential) tr.classList.add('potential');
@@ -800,7 +803,7 @@ function renderTable() {
     const cityClass = item.ciudad === 'Cardales' ? 'city-cardales' : 'city-capilla';
     const cityIcon = item.ciudad === 'Cardales' ? '🏘️' : '🏡';
     
-    // ==================== MENSAJE DINÁMICO DE WHATSAPP CON PRECIOS Y TOTAL ====================
+    // ==================== MENSAJE DINÁMICO DE WHATSAPP CON TOTAL UNIFICADO EN ARS ====================
     let intereses = [];
     let totalARS = 0;
     let totalUSD = 0;
@@ -824,18 +827,18 @@ function renderTable() {
     
     let msgFinal = msgBase;
     if (intereses.length > 0) {
-      let totalStr = "";
-      if (totalARS > 0 && totalUSD > 0) {
-        totalStr = `$${totalARS.toLocaleString('es-AR')} ARS + $${totalUSD} USD`;
-      } else if (totalARS > 0) {
-        totalStr = `$${totalARS.toLocaleString('es-AR')} ARS`;
-      } else if (totalUSD > 0) {
-        totalStr = `$${totalUSD} USD`;
+      // Convertimos el total en USD a ARS y lo sumamos al total en ARS
+      const totalUSDenARS = totalUSD * tc;
+      const granTotalARS = totalARS + totalUSDenARS;
+      
+      let totalStr = `💰 *Total Inversión:* $${granTotalARS.toLocaleString('es-AR')} ARS`;
+      if (totalUSD > 0) {
+        totalStr += ` (Incluye $${totalUSD} USD convertidos a $${totalUSDenARS.toLocaleString('es-AR')} ARS al tipo de cambio actual)`;
       }
       
       msgFinal += `\n\n📌 *Propuesta personalizada para tu local en ${item.ciudad}:*\n` + 
                   intereses.map(i => `✅ ${i}`).join("\n") + 
-                  `\n\n💰 *Total Inversión:* ${totalStr}`;
+                  `\n\n${totalStr}`;
     }
     
     const waLink = `<a href="https://wa.me/${item.telefono}?text=${encodeURIComponent(msgFinal)}" target="_blank" class="wa-link">
