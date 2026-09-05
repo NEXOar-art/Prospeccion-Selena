@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Dashboard Leads Cardales & Capilla del Señor | NEXO-ART</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
@@ -51,17 +52,9 @@
     gap: 12px;
     flex-wrap: wrap;
   }
-  .exchange-rate-container .icon {
-    font-size: 28px;
-  }
-  .exchange-rate-container .title {
-    font-size: 15px;
-    font-weight: 700;
-  }
-  .exchange-rate-container .sub {
-    font-size: 12px;
-    opacity: 0.85;
-  }
+  .exchange-rate-container .icon { font-size: 28px; }
+  .exchange-rate-container .title { font-size: 15px; font-weight: 700; }
+  .exchange-rate-container .sub { font-size: 12px; opacity: 0.85; }
   .exchange-rate-container input {
     width: 140px;
     padding: 10px 14px;
@@ -305,6 +298,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
   }
   .table-header h3 { font-size: 16px; color: #2c3e50; }
   .table-count {
@@ -315,8 +310,11 @@
     font-size: 12px;
     font-weight: 600;
   }
-  .table-wrapper { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .table-wrapper { 
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 850px; }
   thead {
     background: linear-gradient(135deg, #0077B6 0%, #00B4D8 100%);
     color: white;
@@ -328,6 +326,7 @@
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.3px;
+    white-space: nowrap;
   }
   th:nth-child(2) { text-align: left; }
   td {
@@ -344,7 +343,7 @@
 
   .checkbox-cell { width: 40px; }
   .checkbox-cell input[type="checkbox"] {
-    width: 18px; height: 18px;
+    width: 20px; height: 20px;
     cursor: pointer;
     accent-color: #06D6A0;
   }
@@ -352,19 +351,21 @@
   .wa-link {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
     background: #25D366;
     color: white;
-    padding: 6px 12px;
+    padding: 8px 14px;
     border-radius: 20px;
     text-decoration: none;
     font-size: 12px;
     font-weight: 600;
     transition: all 0.2s;
     white-space: nowrap;
+    min-height: 44px;
   }
   .wa-link:hover { background: #128C7E; transform: scale(1.05); }
-  .wa-icon { width: 14px; height: 14px; }
+  .wa-icon { width: 16px; height: 16px; }
 
   .city-badge {
     display: inline-block;
@@ -372,6 +373,7 @@
     border-radius: 12px;
     font-weight: 700;
     font-size: 12px;
+    white-space: nowrap;
   }
   .city-cardales { background: #e0f4ff; color: #0077B6; }
   .city-capilla { background: #fff4d6; color: #FF9F1C; }
@@ -380,13 +382,18 @@
   .plan-btn {
     background: white;
     border: 2px solid #e0e6ed;
-    padding: 5px 10px;
+    padding: 8px 12px;
     border-radius: 14px;
     cursor: pointer;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     transition: all 0.2s;
     color: #7f8c8d;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
   .plan-btn:hover { transform: scale(1.05); }
   .plan-btn.basic.active {
@@ -410,13 +417,18 @@
     background: white;
     border: 2px solid #9D4EDD;
     color: #9D4EDD;
-    padding: 5px 12px;
+    padding: 8px 12px;
     border-radius: 14px;
     cursor: pointer;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     transition: all 0.2s;
     white-space: nowrap;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
   .skill-btn:hover { transform: scale(1.05); }
   .skill-btn.active {
@@ -427,13 +439,14 @@
 
   .price-display {
     display: inline-block;
-    padding: 5px 12px;
+    padding: 6px 12px;
     border-radius: 12px;
     font-weight: 700;
     font-size: 12px;
     background: #f0f4f8;
     color: #7f8c8d;
     min-width: 100px;
+    text-align: center;
   }
   .price-display.basic { background: #e0f4ff; color: #0077B6; }
   .price-display.advanced { background: #fff4d6; color: #d48806; }
@@ -444,12 +457,17 @@
     background: transparent;
     border: 2px solid #06D6A0;
     color: #06D6A0;
-    padding: 5px 12px;
+    padding: 8px 14px;
     border-radius: 15px;
     cursor: pointer;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     transition: all 0.2s;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
   .potential-btn.active {
     background: #06D6A0;
@@ -459,12 +477,48 @@
 
   .hidden { display: none; }
 
+  /* ==================== RESPONSIVE MEJORADO ==================== */
   @media (max-width: 768px) {
-    .header h1 { font-size: 20px; }
+    body { padding: 10px; }
+    .header { padding: 15px; }
+    .header h1 { font-size: 18px; }
+    .header .subtitle { font-size: 13px; }
+    
+    .exchange-rate-container { 
+      flex-direction: column; 
+      align-items: stretch; 
+      text-align: center; 
+    }
+    .exchange-rate-container .label-group { 
+      justify-content: center; 
+      flex-direction: column;
+    }
+    .exchange-rate-container input { width: 100%; max-width: 200px; margin: 0 auto; }
+    
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .total-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .benefits-grid { grid-template-columns: 1fr; }
+    
+    .table-header { flex-direction: column; align-items: flex-start; }
+    .table-header h3 { font-size: 15px; }
+    
+    th, td { padding: 10px 8px; font-size: 12px; }
+    
+    .city-badge { font-size: 11px; padding: 4px 8px; }
+  }
+  
+  @media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 16px; }
     .kpi-value { font-size: 22px; }
-    th, td { padding: 8px 6px; font-size: 11px; }
     .total-item .value { font-size: 20px; }
     .total-item.highlight .value { font-size: 22px; }
+    
+    .plan-btn, .skill-btn, .potential-btn {
+      font-size: 11px;
+      padding: 6px 8px;
+    }
   }
 </style>
 </head>
@@ -585,7 +639,7 @@
     <div class="plan-card">
       <div class="plan-name">🥉 Básico</div>
       <div class="plan-price">$98.000 ARS</div>
-      <div class="plan-maintenance">+ $0/mes mantenimiento</div>
+      <!-- Se eliminó la línea de mantenimiento para evitar confusión, ya que es pago único -->
       <div class="plan-desc">Landing page estática, diseño premium responsive, formulario de captura de leads.</div>
     </div>
     <div class="plan-card popular">
@@ -602,7 +656,7 @@
     </div>
   </div>
   <div class="addon">
-    📊 <strong>Skill Dashboard específico para restaurantes:</strong> + 40 USD por única vez (Opcional) — Se suma al plan elegido.
+    📊 <strong>Skill Tablero de Control específico para restaurantes:</strong> + 40 USD por única vez (Opcional) — Se suma al plan elegido.
   </div>
   <div class="payment-methods">
     <div>💳 <strong>Métodos de Pago:</strong></div>
@@ -627,7 +681,7 @@
           <th>🥉 Básico</th>
           <th>⭐ Avanzado</th>
           <th>🥇 Premium</th>
-          <th>📊 Skill</th>
+          <th>📊 Skill Tablero de Control<br><small>(opcional)</small></th>
           <th>💰 Precio Total</th>
           <th>🎯 Potencial</th>
         </tr>
@@ -672,8 +726,8 @@ const PLANES = {
 };
 const PRECIO_SKILL = 40; // USD
 
-// ==================== MENSAJE DE WHATSAPP ====================
-const msgRestaurantes = encodeURIComponent(`Hola buenas noches!! Somos NEXO-ART y ayudamos a negocios gastronómicos a digitalizar el servicio y atencion, creamos páginas web app para rotiserías, pizzerías y restaurantes, totalmente resposivas para que se vean en cualquier dispositivo.
+// ==================== MENSAJE DE WHATSAPP BASE (ESTÁTICO) ====================
+const msgBase = `Hola buenas noches!! Somos NEXO-ART y ayudamos a negocios gastronómicos a digitalizar el servicio y atencion, creamos páginas web app para rotiserías, pizzerías y restaurantes, totalmente resposivas para que se vean en cualquier dispositivo.
 
 🍕 ¿Qué logramos con tu web?
 Los clientes pueden hacer pedidos, reservas o consultas online, o simplemente desde un código QR en la mesa pedir al mostrador sin necesidad de que lo atienda una persona.
@@ -684,7 +738,7 @@ Además, optimizamos tu presencia en Google Maps y Google Business Profile para 
 Te ayuda a ahorrar tiempo, ordenar la atención y aumentar tus ventas.
 Menos mensajes repetitivos, más pedidos y más tiempo para hacer crecer tu negocio.
 
-Mirá un ejemplo de cómo se vería tu local: https://nexoar-art.github.io/TONGOY/`);
+Mirá un ejemplo de cómo se vería tu local: https://nexoar-art.github.io/TONGOY/`;
 
 // ==================== INIT ====================
 function init() {
@@ -727,16 +781,9 @@ function updateKPIs() {
   document.getElementById('countLeads').textContent = totalLeads + ' negocios';
   
   // ==================== CÁLCULO DEL TOTAL GENERAL ====================
-  // Total en USD: skills + mantenimiento
   const totalUSD = ingresosSkills + mantenimiento;
-  
-  // Total único ARS: precio de planes (ya en ARS) + skills convertidos a ARS
   const totalUnicoARS = ingresos + (ingresosSkills * tc);
-  
-  // Total mensual ARS: mantenimiento convertido a ARS
   const totalMensualARS = mantenimiento * tc;
-  
-  // Total primer mes ARS: único + mensual
   const totalPrimerMesARS = totalUnicoARS + totalMensualARS;
   
   document.getElementById('totalUSD').textContent = '$' + totalUSD.toLocaleString('en-US') + ' USD';
@@ -756,7 +803,21 @@ function renderTable() {
     const cityClass = item.ciudad === 'Cardales' ? 'city-cardales' : 'city-capilla';
     const cityIcon = item.ciudad === 'Cardales' ? '🏘️' : '🏡';
     
-    const waLink = `<a href="https://wa.me/${item.telefono}?text=${msgRestaurantes}" target="_blank" class="wa-link">
+    // ==================== MENSAJE DINÁMICO DE WHATSAPP ====================
+    let intereses = [];
+    if (item.planSeleccionado) {
+      intereses.push(`Plan ${PLANES[item.planSeleccionado].nombre}`);
+    }
+    if (item.skill) {
+      intereses.push("Skill Tablero de Control (opcional)");
+    }
+    
+    let msgFinal = msgBase;
+    if (intereses.length > 0) {
+      msgFinal += "\n\n📌 *Propuesta personalizada que preparamos para vos:*\n" + intereses.map(i => `✅ ${i}`).join("\n");
+    }
+    
+    const waLink = `<a href="https://wa.me/${item.telefono}?text=${encodeURIComponent(msgFinal)}" target="_blank" class="wa-link">
       <svg class="wa-icon" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Enviar
     </a>`;
@@ -765,12 +826,12 @@ function renderTable() {
     let priceDisplay = '<span class="price-display">Sin plan</span>';
     if (item.planSeleccionado) {
       const plan = PLANES[item.planSeleccionado];
-      const mantText = plan.mantenimiento > 0 ? ` + $${plan.mantenimiento}/mes` : ' + $0/mes';
+      // MODIFICADO: Si el mantenimiento es 0 (Plan Básico), no muestra texto de mantenimiento para evitar confusión
+      const mantText = plan.mantenimiento > 0 ? ` + $${plan.mantenimiento}/mes` : '';
       const skillText = item.skill ? ` + Skill $${PRECIO_SKILL}` : '';
       const hasSkillClass = item.skill ? ' has-skill' : '';
       priceDisplay = `<span class="price-display ${item.planSeleccionado}${hasSkillClass}">$${plan.precio.toLocaleString('es-AR')}${mantText}${skillText}</span>`;
     } else if (item.skill) {
-      // Si solo tiene skill sin plan
       priceDisplay = `<span class="price-display has-skill" style="background:#f0e6ff;color:#9D4EDD;">Solo Skill $${PRECIO_SKILL}</span>`;
     }
     
@@ -790,7 +851,6 @@ function renderTable() {
 }
 
 function selectPlan(idx, plan) {
-  // Toggle: si ya está seleccionado el mismo plan, lo deselecciona
   if (leads[idx].planSeleccionado === plan) {
     leads[idx].planSeleccionado = null;
   } else {
