@@ -363,9 +363,50 @@
     transition: all 0.2s;
     white-space: nowrap;
     min-height: 44px;
+    position: relative;
   }
   .wa-link:hover { background: #128C7E; transform: scale(1.05); }
   .wa-icon { width: 16px; height: 16px; }
+
+  /* Tooltip Popup */
+  .wa-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2c3e50;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    max-width: 280px;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .wa-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #2c3e50;
+  }
+  .wa-link:hover .wa-tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+  .wa-tooltip.show {
+    opacity: 1;
+    visibility: visible;
+  }
 
   .city-badge {
     display: inline-block;
@@ -377,6 +418,7 @@
   }
   .city-cardales { background: #e0f4ff; color: #0077B6; }
   .city-capilla { background: #fff4d6; color: #FF9F1C; }
+  .city-matheu { background: #ffe0e0; color: #d63031; }
 
   /* Plan Selector Buttons */
   .plan-btn {
@@ -477,6 +519,35 @@
 
   .hidden { display: none; }
 
+  /* Floating WhatsApp Button */
+  .floating-wa-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #25D366;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 9999;
+    transition: all 0.3s;
+    animation: pulse 2s infinite;
+  }
+  .floating-wa-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); }
+    50% { box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6); }
+  }
+
   /* ==================== RESPONSIVE MEJORADO ==================== */
   @media (max-width: 768px) {
     body { padding: 10px; }
@@ -506,6 +577,13 @@
     th, td { padding: 10px 8px; font-size: 12px; }
     
     .city-badge { font-size: 11px; padding: 4px 8px; }
+    
+    .floating-wa-btn {
+      bottom: 20px;
+      right: 20px;
+      padding: 12px 16px;
+      font-size: 12px;
+    }
   }
   
   @media (max-width: 480px) {
@@ -519,13 +597,18 @@
       font-size: 11px;
       padding: 6px 8px;
     }
+    
+    .floating-wa-btn {
+      padding: 10px 14px;
+      font-size: 11px;
+    }
   }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>🇦🇷 Dashboard Leads Cardales & Capilla del Señor | NEXO-ART</h1>
+  <h1>🇷 Dashboard Leads Cardales & Capilla del Señor | NEXO-ART</h1>
   <div class="subtitle">
     <strong>NEXO‑ART</strong> es una agencia digital especializada en crear páginas web y soluciones de e‑commerce diseñadas para aumentar ventas y optimizar la atención al cliente. Transformamos la presencia online de negocios gastronómicos, comercios y empresas industriales, convirtiendo visitantes en clientes reales.
   </div>
@@ -600,7 +683,7 @@
       <div class="detail">Planes + Skills convertidos</div>
     </div>
     <div class="total-item">
-      <div class="label">🔄 Total Mensual (ARS)</div>
+      <div class="label"> Total Mensual (ARS)</div>
       <div class="value" id="totalMensualARS">$0</div>
       <div class="detail">Mantenimiento recurrente</div>
     </div>
@@ -614,7 +697,7 @@
 
 <!-- Info Card with Benefits & Pricing -->
 <div class="info-card">
-  <h3>🎯 Beneficios Clave para el Negocio</h3>
+  <h3> Beneficios Clave para el Negocio</h3>
   <div class="benefits-grid">
     <div class="benefit-item">
       <strong>🛒 Pedidos y reservas online</strong>
@@ -637,12 +720,12 @@
   <h3 style="margin-top: 18px;">💰 Planes en Argentina (Precios Actualizados)</h3>
   <div class="pricing-grid">
     <div class="plan-card">
-      <div class="plan-name">🥉 Básico</div>
+      <div class="plan-name"> Básico</div>
       <div class="plan-price">$98.000 ARS</div>
       <div class="plan-desc">Landing page estática, diseño premium responsive, formulario de captura de leads.<br><strong>💡 ¡Sin costos de mantenimiento mensual!</strong></div>
     </div>
     <div class="plan-card popular">
-      <div class="plan-name">🥈 Avanzado</div>
+      <div class="plan-name"> Avanzado</div>
       <div class="plan-price">$160.000 ARS</div>
       <div class="plan-maintenance">+ $30 USD/mes mantenimiento</div>
       <div class="plan-desc">Incluye todo lo del Básico + animaciones premium, CRM automático, mantenimiento mensual.</div>
@@ -676,8 +759,8 @@
         <tr>
           <th class="checkbox-cell">✓</th>
           <th style="text-align:left">Ciudad</th>
-          <th>📞 WhatsApp</th>
-          <th>🥉 Básico</th>
+          <th> WhatsApp</th>
+          <th> Básico</th>
           <th>⭐ Avanzado</th>
           <th>🥇 Premium</th>
           <th>📊 Skill Tablero de Control<br><small>(opcional)</small></th>
@@ -689,6 +772,12 @@
     </table>
   </div>
 </div>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/5493489686939?text=Hola%20equipo%20NEXO-ART,%20necesito%20reportar%20algo" target="_blank" class="floating-wa-btn">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  Reportar al equipo
+</a>
 
 <script>
 // ==================== DATOS DE LEADS ====================
@@ -714,14 +803,25 @@ const leads = [
   {ciudad:"Capilla del Señor", telefono:"+5491144086195", planSeleccionado:null, skill:false, potential:false},
   {ciudad:"Capilla del Señor", telefono:"+5491123936485", planSeleccionado:null, skill:false, potential:false},
   {ciudad:"Capilla del Señor", telefono:"+5491134249949", planSeleccionado:null, skill:false, potential:false},
-  {ciudad:"Capilla del Señor", telefono:"+5492323581088", planSeleccionado:null, skill:false, potential:false}
+  {ciudad:"Capilla del Señor", telefono:"+5492323581088", planSeleccionado:null, skill:false, potential:false},
+
+  // MATHEU (9 leads)
+  {ciudad:"Matheu", telefono:"+5491122971769", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Matheu", telefono:"+5491132977011", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Matheu", telefono:"+5491164373814", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Matheu", telefono:"+5491173671293", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Matheu", telefono:"+5491126435300", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Matheu", telefono:"+5493484501563", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Matheu", telefono:"+5491126419288", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Matheu", telefono:"+5493484582284", planSeleccionado:null, skill:false, potential:false},
+  {ciudad:"Matheu", telefono:"+549111578973775", planSeleccionado:null, skill:false, potential:false}
 ];
 
 // ==================== PRECIOS PLANES ACTUALIZADOS ====================
 const PLANES = {
   basico:   { nombre: "🥉 Básico",   precio: 98000,  mantenimiento: 0  },
   avanzado: { nombre: "⭐ Avanzado", precio: 160000, mantenimiento: 30 },
-  premium:  { nombre: "🥇 Premium",  precio: 430000, mantenimiento: 60 }
+  premium:  { nombre: " Premium",  precio: 430000, mantenimiento: 60 }
 };
 const PRECIO_SKILL = 40; // USD
 
@@ -800,8 +900,17 @@ function renderTable() {
     const tr = document.createElement('tr');
     if (item.potential) tr.classList.add('potential');
     
-    const cityClass = item.ciudad === 'Cardales' ? 'city-cardales' : 'city-capilla';
-    const cityIcon = item.ciudad === 'Cardales' ? '🏘️' : '🏡';
+    let cityClass, cityIcon;
+    if (item.ciudad === 'Cardales') {
+      cityClass = 'city-cardales';
+      cityIcon = '🏘️';
+    } else if (item.ciudad === 'Capilla del Señor') {
+      cityClass = 'city-capilla';
+      cityIcon = '';
+    } else {
+      cityClass = 'city-matheu';
+      cityIcon = '🏘️';
+    }
     
     // ==================== MENSAJE DINÁMICO DE WHATSAPP CON TOTAL UNIFICADO EN ARS ====================
     let intereses = [];
@@ -842,6 +951,7 @@ function renderTable() {
     }
     
     const waLink = `<a href="https://wa.me/${item.telefono}?text=${encodeURIComponent(msgFinal)}" target="_blank" class="wa-link">
+      <div class="wa-tooltip">Revisar el mensaje que se envía y si no contesta mandar otro mensaje cada 24Hs</div>
       <svg class="wa-icon" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Enviar
     </a>`;
@@ -877,6 +987,21 @@ function renderTable() {
     `;
     tbody.appendChild(tr);
   });
+  
+  // Agregar event listeners para el tooltip de 4 segundos
+  setTimeout(() => {
+    document.querySelectorAll('.wa-link').forEach(link => {
+      const tooltip = link.querySelector('.wa-tooltip');
+      if (tooltip) {
+        link.addEventListener('mouseenter', () => {
+          tooltip.classList.add('show');
+          setTimeout(() => {
+            tooltip.classList.remove('show');
+          }, 4000);
+        });
+      }
+    });
+  }, 100);
 }
 
 function selectPlan(idx, plan) {
